@@ -3,16 +3,19 @@ import Image from "next/image";
 import f1_chatbot_logo from "./assets/f1_chatbot_logo.jpg";
 import { useChat } from "ai/react";
 import { Message } from "ai";
+import Bubble from "./components/Bubble";
+import LoadingBubble from "./components/LoadingBubble";
+import PromptSuggestionRow from "./components/PromptSuggestionRow";
 
 const Home = () => {
   const { input, isLoading, messages, handleInputChange, handleSubmit } =
     useChat();
 
-  const noMessages = true;
+  const noMessages = false;
 
   return (
     <main>
-      <Image src={f1_chatbot_logo} width={290} alt="F1 Chatbot Logo" />
+      <Image src={f1_chatbot_logo} width={250} alt="F1 Chatbot Logo" />
       <h1 className="title-chatbot">Formula One Chatbot</h1>
       <section className={noMessages ? "" : "populated"}>
         {noMessages ? (
@@ -23,12 +26,14 @@ const Home = () => {
               with the most up-to-date answers. I hope you enjoy!
             </p>
             <br />
-            {/* <PromptSuggestionRow/> */}
+            <PromptSuggestionRow />
           </>
         ) : (
           <>
-            {/* map messages onto text bubbles */}
-            {/* <LoadingBubble/> */}
+            {messages.map((message, index) => (
+              <Bubble key={`message-${index}`} message={message} />
+            ))}
+            {isLoading && <LoadingBubble />}
           </>
         )}
       </section>
