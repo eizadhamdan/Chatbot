@@ -20,19 +20,11 @@ const openai = new OpenAi({ apiKey: OPENAI_API_KEY });
 const f1Data = [
   "https://en.wikipedia.org/wiki/Formula_One",
   "https://www.skysports.com/f1/opinion",
-  "https://www.skysports.com/f1/gossip",
-  "https://www.skysports.com/f1/news",
-  "https://www.forbes.com/sites/brettknight/2024/12/10/formula-1s-highest-paid-drivers-2024/",
   "https://www.formula1.com/en/latest/all",
   "https://en.wikipedia.org/wiki/2024_Formula_One_World_Championship",
   "https://en.wikipedia.org/wiki/2023_Formula_One_World_Championship",
-  "https://en.wikipedia.org/wiki/2022_Formula_One_World_Championship",
-  "https://en.wikipedia.org/wiki/2021_Formula_One_World_Championship",
   "https://www.formula1.com/en/results/2024/races",
   "https://www.formula1.com/en/results/2023/races",
-  "https://www.formula1.com/en/results/2022/races",
-  "https://www.formula1.com/en/results/2021/races",
-  "https://www.formula1.com/en/results/2020/races",
   "https://en.wikipedia.org/wiki/List_of_Formula_One_World_Drivers%27_Champions",
 ];
 
@@ -54,7 +46,11 @@ const createCollection = async (
     },
   });
   console.log(res);
+
+  await sleep(2000);
 };
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const loadSampleData = async () => {
   const collection = await db.collection(ASTRA_DB_COLLECTION);
@@ -78,3 +74,22 @@ const loadSampleData = async () => {
     }
   }
 };
+
+const scrapePage = async (url: string) => {
+  const loader = new PuppeteerWebBaseLoader(url, {
+    launchOptions: {
+      headless: true,
+    },
+    gotoOptions: {
+      waitUntil: "domcontentloaded",
+    },
+    evaluate: async (page, browser) => {
+      const result = await page.evaluate(() => document.body.innerHTML);
+      await browser.close;
+      return result;
+    },
+  });
+  return (await loader.scrape())?.replace(/<[^.]*.?/gm, "");
+};
+
+createCollection().then(() => loadSampleData());
