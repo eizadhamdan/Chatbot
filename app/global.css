@@ -1,4 +1,7 @@
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -9,7 +12,19 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  overflow: hidden;
   background-image: url("assets/background.png");
+}
+
+.title-chatbot {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: 700;
+  font-size: 2rem; /* Adjust as needed */
+  background: linear-gradient(to right, #dc2626, #4b5563);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 main {
@@ -35,7 +50,7 @@ section.populated {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .starter-text {
@@ -50,6 +65,7 @@ form {
   padding-top: 20px;
   border-radius: 0 0 10px 10px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 input.question-box {
@@ -71,4 +87,43 @@ input[type="submit"] {
 
 input:focus {
   outline: none;
+}
+
+.loader-bubble {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  height: 15px;
+  overflow: hidden;
+}
+
+.loader-bubble div {
+  width: 15px;
+  height: 15px;
+  background-color: #383838;
+  border-radius: 50%;
+  animation: loading 1.5s infinite ease-in-out;
+  box-sizing: border-box;
+}
+
+.loader-bubble div:nth-child(1) {
+  animation-delay: 0s;
+}
+.loader-bubble div:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.loader-bubble div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes loading {
+  0%,
+  80%,
+  100% {
+    transform: scale(0); /* Shrink the bubble */
+  }
+  40% {
+    transform: scale(1); /* Grow the bubble */
+  }
 }
