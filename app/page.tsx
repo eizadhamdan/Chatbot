@@ -13,6 +13,15 @@ const Home = () => {
 
   const noMessages = false;
 
+  const handlePrompt = (promptText) => {
+    const msg: Message = {
+      id: crypto.randomUUID(),
+      content: promptText,
+      role: "user",
+    };
+    append(msg);
+  };
+
   return (
     <main>
       <Image src={f1_chatbot_logo} width={250} alt="F1 Chatbot Logo" />
@@ -26,7 +35,7 @@ const Home = () => {
               with the most up-to-date answers. I hope you enjoy!
             </p>
             <br />
-            <PromptSuggestionRow />
+            <PromptSuggestionRow onPromptClick={handlePrompt} />
           </>
         ) : (
           <>
