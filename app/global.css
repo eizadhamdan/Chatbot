@@ -149,3 +149,23 @@ input:focus {
     transform: scale(1); /* Grow the bubble */
   }
 }
+
+.prompt-suggestion-row {
+  width: 100%;
+}
+
+.prompt-suggestion-button {
+  margin: 8px;
+  padding: 8px;
+  font-size: 15px;
+  border: none;
+  background-color: #ffffff;
+  border-radius: 10px;
+  color: #383838;
+  box-shadow: #959da533 0 8px 24px;
+}
+
+.prompt-suggestion-button:hover {
+  cursor: pointer;
+  color: #ff8484;
+}
