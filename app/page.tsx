@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import f1_chatbot_logo from "./assets/f1_chatbot_logo.jpg";
 import { useChat } from "ai/react";
@@ -8,8 +9,14 @@ import LoadingBubble from "./components/LoadingBubble";
 import PromptSuggestionRow from "./components/PromptSuggestionRow";
 
 const Home = () => {
-  const { input, isLoading, messages, handleInputChange, handleSubmit } =
-    useChat();
+  const {
+    input,
+    isLoading,
+    messages,
+    handleInputChange,
+    handleSubmit,
+    append,
+  } = useChat();
 
   const noMessages = !messages || messages.length === 0;
 
