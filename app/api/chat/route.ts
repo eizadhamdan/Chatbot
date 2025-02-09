@@ -21,13 +21,13 @@ const db = client.db(ASTRA_DB_API_ENDPOINT, { namespace: ASTRA_DB_NAMESPACE });
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
-    const latetMessage = messages[messages.length - 1]?.content;
+    const latestMessage = messages[messages.length - 1]?.content;
 
     let docContext = "";
 
     const embedding = await openai.embeddings.create({
       model: "text-embedding-3-small",
-      input: latetMessage,
+      input: latestMessage,
       encoding_format: "float",
     });
 
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
         ${docContext}
         END CONTEXT
         ------------------
-            QUESTION:   ${latetMessage}
+            QUESTION:   ${latestMessage}
         ------------------
         `,
     };
