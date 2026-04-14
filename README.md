@@ -1,4 +1,4 @@
-# Formula One Chatbot – Powered by RAG and Next.js
+# Formula One Chatbot 
 
 ## Overview
 This Formula One chatbot is a cutting-edge web application designed to provide users with comprehensive and accurate information about Formula One. It leverages a Retrieval-Augmented Generation (RAG) architecture to combine data scraping, dynamic querying, and robust machine learning models, offering precise and insightful responses to F1-related queries.
